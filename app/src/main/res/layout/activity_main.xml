@@ -16,10 +16,10 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
-        android:id="@+id/btnMenu2"
+        android:id="@+id/btnPlay"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/play200"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/view1"
@@ -28,14 +28,14 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/btnMenu3"
+        android:id="@+id/btnPause"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="147dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/pause32"
         android:backgroundTint="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/btnMenu2"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlay"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -44,10 +44,10 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="147dp"
+        android:layout_marginTop="15dp"
         android:background="@drawable/stop32"
         android:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/btnMenu2"
+        app:layout_constraintStart_toEndOf="@+id/btnPlay"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -80,7 +80,7 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
-        android:id="@+id/btnRecord"
+        android:id="@+id/btnRecordlist"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="23dp"
@@ -95,7 +95,7 @@
         android:id="@+id/imageView3"
         android:layout_width="168dp"
         android:layout_height="158dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toStartOf="@+id/view1"
         app:layout_constraintStart_toEndOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/txtAPPName"
