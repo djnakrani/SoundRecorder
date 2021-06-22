@@ -19,24 +19,25 @@
         android:id="@+id/btnPlay"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="90dp"
         android:background="@drawable/play200"
         android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
         app:layout_constraintEnd_toStartOf="@+id/view1"
         app:layout_constraintStart_toEndOf="@+id/view1"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btnPause"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="105dp"
         android:background="@drawable/pause32"
         android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnPlay"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
@@ -44,23 +45,24 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginBottom="105dp"
         android:background="@drawable/stop32"
         android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPlay"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/txtAPPName"
         android:layout_width="256dp"
         android:layout_height="45dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="26dp"
         android:fontFamily="@font/aclonica"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="25sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/view1"
         app:layout_constraintHorizontal_bias="0.5"
@@ -95,7 +97,7 @@
         android:id="@+id/imageView3"
         android:layout_width="168dp"
         android:layout_height="158dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintEnd_toStartOf="@+id/view1"
         app:layout_constraintStart_toEndOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/txtAPPName"
@@ -105,7 +107,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="35dp"
         android:fontFamily="@font/aclonica"
         android:text="02 : 30 : 00"
         android:textAlignment="center"
@@ -113,8 +115,8 @@
         android:textColorHint="#FFFFFF"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlay"
         app:layout_constraintEnd_toStartOf="@+id/view1"
-        app:layout_constraintStart_toEndOf="@+id/view1"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintStart_toEndOf="@+id/view1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
