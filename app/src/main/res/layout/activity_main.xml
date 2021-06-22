@@ -27,18 +27,18 @@
         app:layout_constraintStart_toEndOf="@+id/view1"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-    <Button
-        android:id="@+id/btnPause"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="105dp"
-        android:background="@drawable/pause32"
-        android:backgroundTint="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlay"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+<!--    <Button-->
+<!--        android:id="@+id/btnPause"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginBottom="105dp"-->
+<!--        android:background="@drawable/pause_white"-->
+<!--        android:backgroundTint="#FFFFFF"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/btnPlay"-->
+<!--        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
     <Button
         android:id="@+id/btnSave"
@@ -47,11 +47,24 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginBottom="105dp"
-        android:background="@drawable/stop32"
+        android:background="@drawable/stop_white"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnPlay"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+<!--    <Button-->
+<!--        android:id="@+id/btnSave"-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginStart="30dp"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginBottom="105dp"-->
+<!--        android:background="@drawable/stop32"-->
+<!--        android:backgroundTint="#FFFFFF"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btnPlay"-->
+<!--        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />-->
 
     <TextView
         android:id="@+id/txtAPPName"
@@ -97,19 +110,19 @@
         android:id="@+id/imageView3"
         android:layout_width="168dp"
         android:layout_height="158dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintEnd_toStartOf="@+id/view1"
         app:layout_constraintStart_toEndOf="@+id/view1"
         app:layout_constraintTop_toBottomOf="@+id/txtAPPName"
-        app:srcCompat="@drawable/microphone" />
+        android:background="@drawable/microphone_white" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
         android:fontFamily="@font/aclonica"
-        android:text="02 : 30 : 00"
+        android:text="00 : 00 : 00"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"

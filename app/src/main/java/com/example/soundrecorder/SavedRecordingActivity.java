@@ -61,6 +61,7 @@ public class SavedRecordingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(SavedRecordingActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
