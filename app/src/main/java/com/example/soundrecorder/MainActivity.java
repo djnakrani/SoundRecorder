@@ -9,22 +9,26 @@ import android.content.pm.PackageManager;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import static android.Manifest.permission.RECORD_AUDIO;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1;
     Button recording,start,save;
-//    private boolean isRecording =false;
+    private boolean isRecording =false;
     private static String filename = null;
     MediaRecorder media;
 
@@ -48,54 +52,107 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkPermission()) {
-                    String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()+ "/AudioRecording.3gp";
-                    SimpleDateFormat Formater = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ENGLISH);
-                    Date now = new Date();
-                    filename = "Recording_" + Formater.format(now) + ".mp3";
-                    media = new MediaRecorder();
-                    media.setAudioSource(MediaRecorder.AudioSource.MIC);
-                    media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-                    media.setOutputFile(filename);
-                    media.setOutputFile(filePath + "/" + filename);
-                    media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                    try {
-                        media.prepare();
-                    } catch (IOException e) {
-                        Log.e("Prepare", "prepare() failed");
-                    }
-                    media.start();
-                }
-                else {
-                    RequestPermissions();
-                }
-//                if(isRecording)//Stop Recording
-//                {
-//                    stopRecord();
-//                    Toast.makeText(MainActivity.this,"Record Stop",Toast.LENGTH_SHORT).show();
-//                    isRecording=false;
-//                }
-//                else{//start Recording
-//                    Toast.makeText(MainActivity.this,"Work Else",Toast.LENGTH_SHORT).show();
-//                    if(checkPermission())
-//                    {
-//                        Toast.makeText(MainActivity.this,"Record work",Toast.LENGTH_SHORT).show();
-//                          startRecord();
-//                        isRecording=true;
+//                if(checkPermission()) {
+//                    String filePath = Environment.getExternalStorageDirectory().getAbsolutePath().substring(7);
+//                    SimpleDateFormat Formater = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ENGLISH);
+//                    Date now = new Date();
+//                    filename = "Recording_" + Formater.format(now) + ".mp3";
+//                    media = new MediaRecorder();
+//                    media.setAudioSource(MediaRecorder.AudioSource.MIC);
+//                    media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+////                    media.setOutputFile(filename);
+//                    media.setOutputFile(filePath + "/" + filename);
+//                    media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//                    try {
+//                        media.prepare();
+//                    } catch (IOException e) {
+//                        Log.e("Prepare", "prepare() failed");
 //                    }
+//                    media.start();
+//                    Toast.makeText(MainActivity.this,"Record Start",Toast.LENGTH_SHORT).show();
+//
 //                }
+//                else {
+//                    RequestPermissions();
+//                }
+                if(isRecording)//Stop Recording
+                {
+                    stopRecord();
+                    Toast.makeText(MainActivity.this,"Record Stop",Toast.LENGTH_SHORT).show();
+                    isRecording=false;
+                }
+                else{//start Recording
+
+                    Toast.makeText(MainActivity.this,"Start",Toast.LENGTH_SHORT).show();
+
+                    if(checkPermission())
+                    {
+                        Toast.makeText(MainActivity.this,"Record work",Toast.LENGTH_SHORT).show();
+                        startRecord();
+                        isRecording=true;
+                    }
+                    else
+                    {
+                        RequestPermissions();
+                    }
+                }
             }
         });
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                media.stop();
-                media.release();
-                media= null;
-                Toast.makeText(MainActivity.this,"Record Stop",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
+
+    private void startRecord() {
+//        String pathfile= Environment.getExternalStorageDirectory().getAbsolutePath();
+//        SimpleDateFormat Formater=new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ENGLISH);
+//        Date now=new Date();
+//        filename = "Recording_"+Formater.format(now)+".mp3";
+//        media=new MediaRecorder();
+//        media.setAudioSource(MediaRecorder.AudioSource.MIC);
+//        media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//        media.setOutputFile(pathfile+"/"+filename);
+//        media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//        try {
+//            media.prepare();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        media.start();
+        String filepath = Environment.getExternalStorageDirectory().getPath();
+        File file = new File(filepath, "MyRecord");
+
+        if (!file.exists())
+            file.mkdirs();
+
+        String filepath2 =file.getAbsolutePath();
+        media=new MediaRecorder();
+        media.reset();
+        media.setAudioSource(MediaRecorder.AudioSource.MIC);
+        media.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+        media.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+        media.setOutputFile(filepath2+"/Audio.mp3");
+        try {
+            media.prepare();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        media.start();
+    }
+
+    private void stopRecord() {
+
+            media.stop();
+            media.release();
+            media = null;
+        Toast.makeText(MainActivity.this,"Record Stop",Toast.LENGTH_SHORT).show();
+    }
+
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
