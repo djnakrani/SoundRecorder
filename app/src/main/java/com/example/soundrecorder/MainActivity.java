@@ -52,29 +52,7 @@ public class MainActivity extends AppCompatActivity {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(checkPermission()) {
-//                    String filePath = Environment.getExternalStorageDirectory().getAbsolutePath().substring(7);
-//                    SimpleDateFormat Formater = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ENGLISH);
-//                    Date now = new Date();
-//                    filename = "Recording_" + Formater.format(now) + ".mp3";
-//                    media = new MediaRecorder();
-//                    media.setAudioSource(MediaRecorder.AudioSource.MIC);
-//                    media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-////                    media.setOutputFile(filename);
-//                    media.setOutputFile(filePath + "/" + filename);
-//                    media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//                    try {
-//                        media.prepare();
-//                    } catch (IOException e) {
-//                        Log.e("Prepare", "prepare() failed");
-//                    }
-//                    media.start();
-//                    Toast.makeText(MainActivity.this,"Record Start",Toast.LENGTH_SHORT).show();
-//
-//                }
-//                else {
-//                    RequestPermissions();
-//                }
+
                 if(isRecording)//Stop Recording
                 {
                     stopRecord();
@@ -107,21 +85,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRecord() {
-//        String pathfile= Environment.getExternalStorageDirectory().getAbsolutePath();
-//        SimpleDateFormat Formater=new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ENGLISH);
-//        Date now=new Date();
-//        filename = "Recording_"+Formater.format(now)+".mp3";
-//        media=new MediaRecorder();
-//        media.setAudioSource(MediaRecorder.AudioSource.MIC);
-//        media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-//        media.setOutputFile(pathfile+"/"+filename);
-//        media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//        try {
-//            media.prepare();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        media.start();
         String filepath = Environment.getExternalStorageDirectory().getPath();
         File file = new File(filepath, "MyRecord");
 
@@ -129,28 +92,28 @@ public class MainActivity extends AppCompatActivity {
             file.mkdirs();
 
         String filepath2 =file.getAbsolutePath();
+        SimpleDateFormat Formater = new SimpleDateFormat("yyyy_MM_dd_hh_mm_ss", Locale.ENGLISH);
+        Date now = new Date();
+        filename = "Recording_" + Formater.format(now) + ".mp3";
         media=new MediaRecorder();
         media.reset();
         media.setAudioSource(MediaRecorder.AudioSource.MIC);
-        media.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
-        media.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-        media.setOutputFile(filepath2+"/Audio.mp3");
+        media.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        media.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        media.setOutputFile(filepath2+"/"+filename);
         try {
             media.prepare();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         media.start();
     }
 
     private void stopRecord() {
-
             media.stop();
             media.release();
             media = null;
-        Toast.makeText(MainActivity.this,"Record Stop",Toast.LENGTH_SHORT).show();
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
