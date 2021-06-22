@@ -2,21 +2,21 @@ package com.example.soundrecorder;
 
 public class Items {
     private String name;
-    private String desc;
-    private String time;
+    private String date;
+    private String duration;
 
-    public Items(String name, String desc, String time) {
+    public Items(String name, String date, String duration) {
         this.name = name;
-        this.desc = desc;
-        this.time = time;
+        this.date = date;
+        this.duration = duration;
     }
     public String getName() {
         return name;
     }
-    public String getDesc() {
-        return desc;
+    public String getDate() {
+        return date;
     }
-    public String getTime() {
-        return time;
+    public String getDuration() {
+        return duration;
     }
 }

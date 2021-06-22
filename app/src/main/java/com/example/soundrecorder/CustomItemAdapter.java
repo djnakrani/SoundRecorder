@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,12 +37,12 @@ public class CustomItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = View.inflate(conItems,R.layout.item_listview,null);
         TextView tvName = v.findViewById(R.id.txtname);
-        TextView tvDesc = v.findViewById(R.id.txtDesc);
-        TextView tvTime = v.findViewById(R.id.txtTime);
+        TextView tvDate = v.findViewById(R.id.txtDesc);
+        TextView tvDuration = v.findViewById(R.id.txtTime);
 
         tvName.setText(lstItems.get(position).getName());
-        tvDesc.setText(lstItems.get(position).getDesc());
-        tvTime.setText(lstItems.get(position).getTime());
+        tvDate.setText(lstItems.get(position).getDate());
+        tvDuration.setText(lstItems.get(position).getDuration());
         return v;
     }
 }

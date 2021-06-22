@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,24 +23,25 @@ public class SavedRecordingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_recording);
+
         lstView = findViewById(R.id.lstItems);
         btnBack = findViewById(R.id.btnBack);
         List<Items> mylst = new ArrayList<>();
+
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyRecord/";
         File directory = new File(path);
         File[] files = directory.listFiles();
-        for (int i = 0; i < files.length; i++)
-        {
 
+        for (int i = 0; i < files.length; i++){
             String file_name = files[i].getName();
             String dd=file_name.substring(18,20);
             String mm=file_name.substring(15,17);
             String yy=file_name.substring(12,14);
             String name="My"+file_name.substring(0,10) +"_"+ i;
-            String time=dd+"/"+mm+"/"+yy;
-            String Duration=String.valueOf(files[i].length()/1024)+" KB";
+            String dt=dd+"/"+mm+"/"+yy;
+            String duration = String.valueOf(files[i].length()/1024) + " KB";
             // you can store name to arraylist and use it later
-            mylst.add(new Items(name,time,Duration));
+            mylst.add(new Items(name,dt,duration));
         }
 
 
@@ -51,7 +51,7 @@ public class SavedRecordingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String nm = mylst.get(position).getName();
-                String desc = mylst.get(position).getDesc();
+                String desc = mylst.get(position).getDate();
                 Toast.makeText(SavedRecordingActivity.this, "File Name is " + nm + "\nTime is " +desc,Toast.LENGTH_LONG).show();
             }
         });
