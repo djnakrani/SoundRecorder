@@ -12,7 +12,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/txtTime"
         android:layout_width="60dp"
@@ -27,7 +26,6 @@
         tools:ignore="TextContrastCheck"
         android:layout_marginRight="20dp"
         android:gravity="end" />
-
     <TextView
         android:id="@+id/txtname"
         android:layout_width="288dp"
@@ -41,7 +39,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
-
     <TextView
         android:id="@+id/txtDesc"
         android:layout_width="369dp"
@@ -53,6 +50,4 @@
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/txtname"
         tools:ignore="TextContrastCheck" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
