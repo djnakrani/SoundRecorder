@@ -1,10 +1,14 @@
 package com.example.soundrecorder;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -41,18 +45,25 @@ public class SavedRecordingActivity extends AppCompatActivity {
             String time=dd+"/"+mm+"/"+yy;
             String Duration=String.valueOf(files[i].length()/1024)+" KB";
             // you can store name to arraylist and use it later
-            mylst.add(new Items(name,time,Duration));
+            mylst.add(new Items(file_name,name,time,Duration));
         }
 
 
        CustomItemAdapter objadpt = new CustomItemAdapter(SavedRecordingActivity.this,mylst);
         lstView.setAdapter(objadpt);
         lstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String nm = mylst.get(position).getName();
-                String desc = mylst.get(position).getDesc();
-                Toast.makeText(SavedRecordingActivity.this, "File Name is " + nm + "\nTime is " +desc,Toast.LENGTH_LONG).show();
+//                File filepath = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/MyRecord/"+mylst.get(position).getFile_name());
+//                Intent in=new Intent();
+//                in.setAction(android.content.Intent.ACTION_VIEW);
+//                in.setDataAndType(Uri.fromFile(filepath), "audio/*");
+//                startActivity(in);
+
+//                String nm = mylst.get(position).getName();
+                String desc = mylst.get(position).getFile_name();
+                Toast.makeText(SavedRecordingActivity.this, "File Name is " + desc,Toast.LENGTH_LONG).show();
             }
         });
 

@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         recording = findViewById(R.id.btnRecordlist);
         imageinfo=findViewById(R.id.imageView3);
         timerview=findViewById(R.id.textTimer);
         start =findViewById(R.id.btnPlay);
         save =findViewById(R.id.btnSave);
         timer=new Timer();
+        save.setEnabled(false);
         recording.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(isRecording){
                     if(isPause){
-                        Toast.makeText(MainActivity.this,"Record pause",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Record pause...",Toast.LENGTH_SHORT).show();
                         imageinfo.setBackground(getResources().getDrawable(R.drawable.microphone_white));
                         start.setBackground(getResources().getDrawable(R.drawable.play200));
                         media.pause();
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         isPause=false;
                     }
                     else{
-                        Toast.makeText(MainActivity.this,"Record Resume",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Record Resume...",Toast.LENGTH_SHORT).show();
                         imageinfo.setBackground(getResources().getDrawable(R.drawable.audio_wave));
                         start.setBackground(getResources().getDrawable(R.drawable.pause_white));
                         media.resume();
@@ -82,14 +82,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"Start",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this,"Start",Toast.LENGTH_SHORT).show();
                     if(checkPermission()){
-//                        Toast.makeText(MainActivity.this,"Record work",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Recording Start...",Toast.LENGTH_SHORT).show();
                         startRecord();
                         startTimer();
                         imageinfo.setBackground(getResources().getDrawable(R.drawable.audio_wave));
                         start.setBackground(getResources().getDrawable(R.drawable.pause_white));
                         isRecording=true;
+                        save.setEnabled(true);
                         isPause=true;
                     }
                     else{ RequestPermissions(); }
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 start.setBackground(getResources().getDrawable(R.drawable.play200));
                 Toast.makeText(MainActivity.this,"Your Recording Saved Successfully....",Toast.LENGTH_SHORT).show();
                 isRecording=false;
+                save.setEnabled(false);
             }
         });
     }

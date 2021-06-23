@@ -11,7 +11,7 @@ import android.widget.VideoView;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
-    private static int SPLASH_TIME = 6000;
+    private static int SPLASH_TIME = 5000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

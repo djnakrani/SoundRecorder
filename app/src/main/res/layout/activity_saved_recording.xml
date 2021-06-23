@@ -10,14 +10,14 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/recordings"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:text="Saved Recording"
         android:textAlignment="viewStart"
-        android:textSize="34sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toRightOf="@+id/btnBack"
+         />
 
     <ListView
         android:id="@+id/lstItems"
@@ -37,7 +37,7 @@
         android:id="@+id/textView2"
         android:layout_width="37dp"
         android:layout_height="24dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:text="@string/Edit"
         android:textColor="#0E61A9"
@@ -52,11 +52,18 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/home_black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <View
+        android:id="@+id/viewhrline"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="3px"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
