@@ -49,6 +49,8 @@ public class SavedRecordingActivity extends AppCompatActivity {
         seekBar=findViewById(R.id.seekbar1);
         btnprev=findViewById(R.id.btnprev);
         btnnext=findViewById(R.id.btnnext);
+
+        seekBar.setEnabled(false);
         List<Items> mylst = new ArrayList<>();
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyRecord/";
         File directory = new File(path);
@@ -77,7 +79,7 @@ public class SavedRecordingActivity extends AppCompatActivity {
                 String Name=mylst.get(position).getName();
                 String desc = mylst.get(position).getFile_name();
                 txtFilename.setText(Name);
-
+                seekBar.setEnabled(true);
                 startPlay(desc);
 
             }

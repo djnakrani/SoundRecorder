@@ -26,25 +26,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Saved Recording"
+            android:fontFamily="@font/aclonica"
             android:textSize="30sp"
             android:textStyle="bold"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="40dp"
             />
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="37dp"
-            android:layout_height="24dp"
-            android:text="@string/Edit"
-            android:textColor="#0E61A9"
-            android:textColorHint="#FFFFFF"
-            android:textSize="18sp"
-            android:fontFamily="@font/aclonica"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="40dp"
-            />
+<!--        <TextView-->
+<!--            android:id="@+id/textView2"-->
+<!--            android:layout_width="37dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:text="@string/Edit"-->
+<!--            android:textColor="#0E61A9"-->
+<!--            android:textColorHint="#FFFFFF"-->
+<!--            android:textSize="18sp"-->
+<!--            android:fontFamily="@font/aclonica"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginLeft="40dp"-->
+<!--            />-->
 
     </LinearLayout>
 
@@ -125,9 +126,9 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_below="@+id/Seekbar"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/prev" />
+            android:background="@drawable/prev5" />
 
         <Button
             android:id="@+id/btnplay_pause"
@@ -147,7 +148,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
             android:layout_toRightOf="@+id/btnplay_pause"
-            android:background="@drawable/next" />
+            android:background="@drawable/next5" />
     </RelativeLayout>
 
 </RelativeLayout>
