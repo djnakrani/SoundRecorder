@@ -29,7 +29,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 public class MainActivity extends AppCompatActivity {
 
     private static final int PERMISSION_CODE = 1;
-    Button recording,start,save;
+    Button recording,start,save,menu;
     ImageView imageinfo;
     private boolean isRecording =false;
     private static String filename = null;
@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(!checkPermission()){
+            RequestPermissions();
+        }
         setContentView(R.layout.activity_main);
+//        menu=findViewById(R.id.btnMenu);
         recording = findViewById(R.id.btnRecordlist);
         imageinfo=findViewById(R.id.imageView3);
         timerview=findViewById(R.id.textTimer);
@@ -82,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 else{
-//                    Toast.makeText(MainActivity.this,"Start",Toast.LENGTH_SHORT).show();
                     if(checkPermission()){
                         Toast.makeText(MainActivity.this,"Recording Start...",Toast.LENGTH_SHORT).show();
                         startRecord();

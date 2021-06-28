@@ -1,18 +1,21 @@
 package com.example.soundrecorder;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -21,15 +24,31 @@ import java.util.List;
 
 public class SavedRecordingActivity extends AppCompatActivity {
     ListView lstView;
-    Button btnBack;
+    Button btnBack,play_pause,btnprev,btnnext;
     private String path;
+    MediaPlayer mediaPlayer;
+    private boolean isbtnplayer=false;
+    TextView txtFilename,txtruntime,txtfinaltime;
+    private int finalTime=0;
+    private int startTime=0;
+    SeekBar seekBar;
+    private int forwardTime = 5000;
+    private int backwardTime = 5000;
+    private Handler myHandler=new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_recording);
+        play_pause=findViewById(R.id.btnplay_pause);
         lstView = findViewById(R.id.lstItems);
         btnBack = findViewById(R.id.btnBack);
+        txtFilename=findViewById(R.id.txtFileName);
+        txtfinaltime=findViewById(R.id.txtFinalTime);
+        txtruntime=findViewById(R.id.txtTime);
+        seekBar=findViewById(R.id.seekbar1);
+        btnprev=findViewById(R.id.btnprev);
+        btnnext=findViewById(R.id.btnnext);
         List<Items> mylst = new ArrayList<>();
         path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyRecord/";
         File directory = new File(path);
@@ -55,15 +74,12 @@ public class SavedRecordingActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                File filepath = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/MyRecord/"+mylst.get(position).getFile_name());
-//                Intent in=new Intent();
-//                in.setAction(android.content.Intent.ACTION_VIEW);
-//                in.setDataAndType(Uri.fromFile(filepath), "audio/*");
-//                startActivity(in);
-
-//                String nm = mylst.get(position).getName();
+                String Name=mylst.get(position).getName();
                 String desc = mylst.get(position).getFile_name();
-                Toast.makeText(SavedRecordingActivity.this, "File Name is " + desc,Toast.LENGTH_LONG).show();
+                txtFilename.setText(Name);
+
+                startPlay(desc);
+
             }
         });
 
@@ -75,5 +91,102 @@ public class SavedRecordingActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        play_pause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isbtnplayer){
+                    mediaPlayer.pause();
+                    play_pause.setBackground(getResources().getDrawable(R.drawable.play200));
+                    isbtnplayer=false;
+                }
+                else {
+                    mediaPlayer.start();
+                    play_pause.setBackground(getResources().getDrawable(R.drawable.pause_white));
+                    isbtnplayer=true;
+                }
+            }
+        });
+
+        btnnext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int temp = (int)startTime;
+
+                if((temp+forwardTime)<=finalTime){
+                    startTime = startTime + forwardTime;
+                    mediaPlayer.seekTo((int) startTime);
+                }
+            }
+        });
+
+        btnprev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int temp = (int)startTime;
+
+                if((temp-backwardTime)>0){
+                    startTime = startTime - backwardTime;
+                    mediaPlayer.seekTo((int) startTime);
+                }
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                int current_pos = seekBar.getProgress();
+                mediaPlayer.seekTo(current_pos);
+            }
+        });
     }
+
+    private void startPlay(String desc) {
+        String Path= Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyRecord/"+desc;
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+        }
+        mediaPlayer=MediaPlayer.create(this, Uri.parse(Path));
+        mediaPlayer.start();
+        play_pause.setBackground(getResources().getDrawable(R.drawable.pause_white));
+        isbtnplayer=true;
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        seekBar.setMax(mediaPlayer.getDuration());
+        txtfinaltime.setText(createTimeLabel(finalTime));
+        txtruntime.setText(createTimeLabel(startTime));
+        seekBar.setProgress(startTime);
+        myHandler.postDelayed(UpdateSongTime,100);
+
+    }
+
+    private String createTimeLabel(int duration) {
+        String timeLabel = "";
+        int min = duration / 1000 / 60;
+        int sec = duration / 1000 % 60;
+        timeLabel += min + ":";
+        if (sec < 10) timeLabel += "0";
+        timeLabel += sec;
+        return timeLabel;
+    }
+
+    private Runnable UpdateSongTime = new Runnable() {
+        public void run() {
+            startTime = mediaPlayer.getCurrentPosition();
+            txtruntime.setText(createTimeLabel(startTime));
+            seekBar.setProgress(startTime);
+            myHandler.postDelayed(this, 100);
+        }
+    };
+
 }
